@@ -1,0 +1,39 @@
+{
+    "title": "Create Group",
+    "name": "Group",
+    "jsonPage": "viewGroup",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Group"],
+    "fields": [{
+        "name": "Name",
+        "type": "text",
+        "tableRef": "name",
+        "placeholder": "Enter Name",
+        "id": "name",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitGroup",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewGroup"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewGroup"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Group/save"
+    }
+}

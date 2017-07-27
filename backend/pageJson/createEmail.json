@@ -1,0 +1,86 @@
+{
+    "title": "Create Email",
+    "name": "Email",
+    "jsonPage": "viewEmail",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["Email"],
+    "fields": [{
+            "name": "First Name",
+            "type": "text",
+            "tableRef": "name",
+            "placeholder": "Enter First Name",
+            "id": "name",
+            "validation": ["", "trim", ""],
+            "url": ""
+        },
+        {
+            "name": "Last Name",
+            "type": "text",
+            "tableRef": "lastName",
+            "placeholder": "Enter Last Name",
+            "id": "lastName",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Email",
+            "type": "email",
+            "tableRef": "email",
+            "placeholder": "Enter Email",
+            "id": "email",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Salutation",
+            "type": "text",
+            "tableRef": "salutation",
+            "placeholder": "Enter Salutation",
+            "id": "salutation",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Alias",
+            "type": "text",
+            "tableRef": "alias",
+            "placeholder": "Enter Alias",
+            "id": "alias",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Group",
+            "type": "tags",
+            "tableRef": "group",
+            "placeholder": "Select group",
+            "id": "group",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "Group/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "multiple",
+            "validation": ["required", "", "trim"]
+        }
+    ],
+    "action": [{
+        "name": "submit",
+        "action": "submitEmail",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewEmail"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewEmail"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "Email/save"
+    }
+}

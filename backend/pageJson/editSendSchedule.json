@@ -1,0 +1,93 @@
+{
+    "title": "Edit SendSchedule",
+    "name": "SendSchedule",
+    "jsonPage": "viewSendSchedule",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "subject",
+        "type": "text",
+        "tableRef": "subject",
+        "placeholder": "Enter subject",
+        "id": "subject",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "content",
+        "type": "textarea",
+        "tableRef": "content",
+        "placeholder": "Enter content",
+        "id": "content",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "scheduleTime",
+        "type": "date",
+        "tableRef": "scheduleTime",
+        "placeholder": "Enter scheduleTime",
+        "id": "scheduleTime",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "attachment",
+        "type": "file",
+        "tableRef": "attachment",
+        "placeholder": "Enter attachment",
+        "id": "attachment",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Group",
+        "type": "selectFromTable",
+        "tableRef": "group",
+        "placeholder": "Select group",
+        "id": "group",
+        "searchApi": "searchCall",
+        "fieldType": "",
+        "url": "Group/search",
+        "dropDownField": "name",
+        "view": true,
+        "dropDownType": "multiple",
+        "validation": ["required", "", "trim"]
+    }, {
+        "name": "status",
+        "type": "tags",
+        "tableRef": "status",
+        "placeholder": "Enter status",
+        "id": "status",
+        "validation": ["", "trim", ""],
+        "url": "",
+        "dropDownField": "",
+        "dropDownType": "single",
+        "onView": true,
+        "dropDown": ["Pending", "Sent"]
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitSendSchedule",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewSendSchedule"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewSendSchedule"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "SendSchedule/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "SendSchedule/getOne",
+        "params": "_id"
+    }
+}
