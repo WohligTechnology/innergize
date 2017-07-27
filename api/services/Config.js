@@ -271,11 +271,14 @@ var models = {
 
     import: function (name) {
         var jsonExcel = xlsx.parse(name);
+        console.log("jsonExcel", jsonExcel)
         var retVal = [];
         var firstRow = _.slice(jsonExcel[0].data, 0, 1)[0];
+        console.log("****firstRow", firstRow)
         var excelDataToExport = _.slice(jsonExcel[0].data, 1);
         var dataObj = [];
         _.each(excelDataToExport, function (val, key) {
+            console.log("value", val)
             dataObj.push({});
             _.each(val, function (value, key2) {
                 dataObj[key][firstRow[key2]] = value;
@@ -284,6 +287,7 @@ var models = {
         return dataObj;
     },
     importGS: function (filename, callback) {
+        console.log("filename", filename)
         var readstream = gfs.createReadStream({
             filename: filename
         });
@@ -303,6 +307,9 @@ var models = {
         });
     },
     generateExcel: function (name, found, res) {
+        console.log("***name", name)
+        console.log("***found", found)
+
         // name = _.kebabCase(name);
         var excelData = [];
         _.each(found, function (singleData) {
