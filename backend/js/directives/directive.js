@@ -440,7 +440,7 @@ myApp.directive('viewField', function ($http, $filter) {
             $scope.form = {};
             $scope.objectDepth = function () {
                 if (_.isObjectLike($scope.storeObj)) {
-                    if ($scope.storeValue[$scope.storeObj.field]) {
+                    if ($scope.storeValue[$scope.storeObj.tableRef]) {
                         $scope.form.model = $scope.storeValue[$scope.storeObj.tableRef][$scope.storeObj.field];
                         $scope.storeObj = $scope.storeObj.tableRef;
                         if (_.isObjectLike($scope.storeObj)) {
