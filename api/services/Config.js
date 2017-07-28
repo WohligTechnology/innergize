@@ -382,6 +382,78 @@ var models = {
             });
         });
 
+    },
+    readAttachment: function (filename, callback) {
+        console.log("filename", filename);
+        var readstream = gfs.createReadStream({
+            filename: filename
+        });
+        readstream.on('error', function (err) {
+
+            callback(err, false);
+        });
+        var buf;
+        var bufs = [];
+        readstream.on('data', function (d) {
+            bufs.push(d);
+        });
+        readstream.on('end', function () {
+            buf = Buffer.concat(bufs);
+            callback(null, buf);
+        });
+    },
+    sendScheduledEmail: function (fromEmail, toEmail, subject, filename, data) {
+
+        Password.findOneByName("sendgrid", function (err, data) {
+            if (err) {
+
+            } else {
+                var helper = require('sendgrid').mail;
+                var sg = require('sendgrid')(data.key);
+                var fs = require('fs');
+
+                var mail = new helper.Mail();
+                var email = new helper.Email('hr@wohlig.com', 'Example User');
+                mail.setFrom(email);
+
+                mail.setSubject('Hello World from the SendGrid Node.js Library');
+
+                var personalization = new helper.Personalization();
+                email = new helper.Email('jagruti@wohlig.com', 'Example User');
+                personalization.addTo(email);
+                mail.addPersonalization(personalization);
+
+                var content = new helper.Content('text/html', '<html><body>some text here</body></html>')
+                mail.addContent(content);
+
+                var attachment = new helper.Attachment();
+                // var file = fs.readFileSync('views/email/demo.txt');
+                Config.readAttachment(filename, function (err, data) {
+                    console.log("demonstration................");
+                    console.log(data.n);
+                    var base64File = new Buffer(data).toString('base64');
+                    attachment.setContent(base64File);
+                    // attachment.setType('application/text');
+                    attachment.setFilename(filename);
+                    attachment.setDisposition('attachment');
+                    mail.addAttachment(attachment);
+
+                    var request = sg.emptyRequest({
+                        method: 'POST',
+                        path: '/v3/mail/send',
+                        body: mail.toJSON(),
+                    });
+
+                    sg.API(request, function (err, response) {
+                        console.log(response.statusCode);
+                        console.log(response.body);
+                        console.log(response.headers);
+                    });
+                });
+
+            }
+        });
+
     }
 };
 module.exports = _.assign(module.exports, models);
