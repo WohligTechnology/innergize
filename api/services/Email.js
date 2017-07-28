@@ -75,15 +75,16 @@ var model = {
         ], callback);
     },
     getAllEmailsFromGroup: function (groupIds, callback) {
-        console.log("in getAllEmailsFromGroup", groupIds);
         Email.find({
             group: {
-                $in: [groupIds._id]
+                $in: [groupIds]
             }
-        }).lean().exec(callback);
+        }).lean().exec(function (err, data) {
+            callback(err, data);
+        });
     },
     sendEmailWithAttachment: function (emailsObj, emailData, callback) {
-        console.log("emailsObj", emailsObj, "emailData", emailData)
+        console.log("emailsObj", emailsObj[0].email, "emailData", emailData)
         async.concatSeries(emailsObj, function (emailObj, callback) {
             // Config.sendEmail();
         }, callback);
