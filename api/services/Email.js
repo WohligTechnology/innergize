@@ -11,6 +11,7 @@ var schema = new Schema({
     email: {
         type: String,
         excel: "Email",
+        unique: true
     },
     salutation: {
         type: String,
@@ -43,25 +44,26 @@ module.exports = mongoose.model('Email', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group", "group"));
 var model = {
     saveEmails: function (data, callback) {
-        console.log("**in SaveEmails")
-        groupNames = _.split(data.group);
+        groupNames = _.map(_.split(data.group, ","), function (n) {
+            return {
+                name: n
+            };
+        });
         async.waterfall([
             function (callback) { // this is function to get the group names in comma seperated format to id
-                console.log("groupNames", groupNames, "Email.getIdByName", Email.getIdByName);
-                async.concat(groupNames, Email.getIdByName, function (err, response) {
+                async.concat(groupNames, Group.getIdByName, function (err, response) {
                     if (err || _.isEmpty(response)) {
                         callback(err, response);
                     } else {
-                        console.log("jhsdsjka")
-                        data.group = _.map(response, "_id");
+                        data.group = response;
                         callback();
                     }
 
                 });
             },
             function (callback) { // save the email to the database
-                console.log("in saving")
-                Email.save({
+                console.log(data);
+                Email.saveData({
                     name: data.name,
                     lastName: data.lastName,
                     email: data.email,

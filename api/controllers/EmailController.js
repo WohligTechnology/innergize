@@ -2,15 +2,19 @@ module.exports = _.cloneDeep(require("sails-wohlig-controller"));
 var controller = {
     import: function (req, res) {
         //  excel convert to object
-        var filename = req.body.file
-        console.log(req.body);
-        Config.importGS(filename, function (err, exportedData) {
-            console.log("in importGs", exportedData)
-            async.concat(
+        var filename = req.body.file;
+        console.log(req.body.file);
+
+        async.waterfall([function (callback) {
+            Config.importGS(filename, callback);
+        }, function (exportedData, callback) {
+            async.concatSeries(
                 exportedData,
                 Email.saveEmails,
-                res.callback);
-        })
+                callback);
+        }], res.callback);
+
+
     }
 };
 module.exports = _.assign(module.exports, controller);
