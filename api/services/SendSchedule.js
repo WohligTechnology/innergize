@@ -40,6 +40,7 @@ var model = {
         console.log("in getPendingWithIn")
         var currentTime = moment().toDate();
         var startTime = moment().add(-1, "hour").toDate();
+        var emailsAll = {};
         console.log("currentTime", currentTime);
         console.log("startTime", startTime);
         async.waterfall([
@@ -58,28 +59,34 @@ var model = {
             function (schedules, callback) {
                 console.log("*****schedules", schedules)
                 if (_.isEmpty(schedules)) {
-                    callback("No data found");
+                    console.log("empty");
+                    callback("No data found", null);
                 } else {
                     async.concatSeries(schedules, function (schedule, callback) {
                         console.log("*****in concatSeries")
                         console.log("*****in schedules", schedules)
                         async.waterfall([
                             function (callback) { // getting all the emails
+                                console.log("schedule.group", schedule.group);
                                 Email.getAllEmailsFromGroup(schedule.group, callback);
+                            },
+                            function (emails, callback) { // send emails to emails recived
+                                console.log("emails", emails)
+                                Email.sendEmailWithAttachment(emails, schedule, callback);
+                            },
+                            function (data, callback) { // change the status if pending to sent
+                                console.log("in changing status", data)
+                                schedule.status = "Sent";
+                                schedule.save(callback);
                             }
-                            //     function (emails, callback) { // send emails to emails recived
-                            //         Email.sendEmailWithAttachment(emails, schedule, callback);
-                            //     },
-                            //     function (data, callback) { // change the status if pending to sent
-                            //         schedule.status = "Sent";
-                            //         schedule.save(callback);
-                            //     }
                         ], callback);
 
                     }, callback);
                 }
             }
-        ], callback);
+        ], function (err, data) {
+            callback(err, data);
+        });
 
     }
 };

@@ -78,7 +78,7 @@ var model = {
         console.log("in getAllEmailsFromGroup", groupIds);
         Email.find({
             group: {
-                $in: groupIds._id
+                $in: [groupIds._id]
             }
         }).lean().exec(callback);
     },
