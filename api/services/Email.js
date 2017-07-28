@@ -73,6 +73,20 @@ var model = {
                 }, callback);
             }
         ], callback);
+    },
+    getAllEmailsFromGroup: function (groupIds, callback) {
+        console.log("in getAllEmailsFromGroup", groupIds);
+        Email.find({
+            group: {
+                $in: groupIds._id
+            }
+        }).lean().exec(callback);
+    },
+    sendEmailWithAttachment: function (emailsObj, emailData, callback) {
+        console.log("emailsObj", emailsObj, "emailData", emailData)
+        async.concatSeries(emailsObj, function (emailObj, callback) {
+            // Config.sendEmail();
+        }, callback);
     }
 }
 module.exports = _.assign(module.exports, exports, model);
