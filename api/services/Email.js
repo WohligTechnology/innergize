@@ -86,8 +86,11 @@ var model = {
     sendEmailWithAttachment: function (emailsObj, emailData, callback) {
         console.log("emailsObj", emailsObj[0].email, "emailData", emailData)
         async.concatSeries(emailsObj, function (emailObj, callback) {
-            // Config.sendEmail();
-        }, callback);
+            Config.sendScheduledEmail(emailObj, emailData, callback);
+        }, function (err, data) {
+            console.log("ddddddggghjghjjhg", data);
+            callback(err, data);
+        });
     }
 }
 module.exports = _.assign(module.exports, exports, model);

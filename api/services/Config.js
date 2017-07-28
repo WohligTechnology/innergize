@@ -402,8 +402,9 @@ var models = {
             callback(null, buf);
         });
     },
-    sendScheduledEmail: function (fromEmail, toEmail, subject, filename, data) {
-
+    sendScheduledEmail: function (emailobj, maildata, callback) {
+        console.log("///////////////////", emailobj);
+        console.log("////////////////////", maildata);
         Password.findOneByName("sendgrid", function (err, data) {
             if (err) {
 
@@ -416,25 +417,24 @@ var models = {
                 var email = new helper.Email('hr@wohlig.com', 'Example User');
                 mail.setFrom(email);
 
-                mail.setSubject('Hello World from the SendGrid Node.js Library');
+                mail.setSubject(maildata.subject);
 
                 var personalization = new helper.Personalization();
-                email = new helper.Email('jagruti@wohlig.com', 'Example User');
+                email = new helper.Email(emailobj.email, emailobj.name);
                 personalization.addTo(email);
                 mail.addPersonalization(personalization);
 
-                var content = new helper.Content('text/html', '<html><body>some text here</body></html>')
+                var content = new helper.Content('text/plan', maildata.content);
                 mail.addContent(content);
 
                 var attachment = new helper.Attachment();
                 // var file = fs.readFileSync('views/email/demo.txt');
-                Config.readAttachment(filename, function (err, data) {
+                Config.readAttachment("597b3f8ac0ccfd1e20ee3d01.pdf", function (err, data) {
                     console.log("demonstration................");
-                    console.log(data.n);
                     var base64File = new Buffer(data).toString('base64');
                     attachment.setContent(base64File);
                     // attachment.setType('application/text');
-                    attachment.setFilename(filename);
+                    attachment.setFilename("597b3f8ac0ccfd1e20ee3d01.pdf");
                     attachment.setDisposition('attachment');
                     mail.addAttachment(attachment);
 
@@ -445,9 +445,11 @@ var models = {
                     });
 
                     sg.API(request, function (err, response) {
-                        console.log(response.statusCode);
-                        console.log(response.body);
-                        console.log(response.headers);
+                        if (err) {
+                            callback(err, "error in sending email.");
+                        } else {
+                            callback(err, response);
+                        }
                     });
                 });
 
