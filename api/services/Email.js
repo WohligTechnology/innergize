@@ -43,17 +43,30 @@ module.exports = mongoose.model('Email', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group", "group"));
 var model = {
     saveEmails: function (data, callback) {
+        console.log("**in SaveEmails")
         groupNames = _.split(data.group);
         async.waterfall([
             function (callback) { // this is function to get the group names in comma seperated format to id
+                console.log("groupNames", groupNames, "Email.getIdByName", Email.getIdByName);
                 async.concat(groupNames, Email.getIdByName, function (err, response) {
-                    data.group = _.map(response, "_id");
-                    callback();
+                    if (err || _.isEmpty(response)) {
+                        callback(err, response);
+                    } else {
+                        console.log("jhsdsjka")
+                        data.group = _.map(response, "_id");
+                        callback();
+                    }
+
                 });
             },
             function (callback) { // save the email to the database
+                console.log("in saving")
                 Email.save({
-                    name: data.firstName,
+                    name: data.name,
+                    lastName: data.lastName,
+                    email: data.email,
+                    salutation: data.salutation,
+                    alias: data.alias,
                     group: data.group
                 }, callback);
             }
