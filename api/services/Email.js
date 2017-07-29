@@ -88,7 +88,7 @@ var model = {
         async.concatSeries(emailsObj, function (emailObj, callback) {
             Config.sendScheduledEmail(emailObj, emailData, callback);
         }, function (err, data) {
-            console.log("$$$$$$$$$", data);
+            console.log(data);
             callback(err, data);
         });
     }

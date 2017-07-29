@@ -415,7 +415,7 @@ var models = {
                     var fs = require('fs');
 
                     var mail = new helper.Mail();
-                    var email = new helper.Email('knowledge@innergize.in', 'Innergize');
+                    var email = new helper.Email(maildata.fromEmail.email, maildata.fromEmail.fromName);
                     mail.setFrom(email);
 
                     mail.setSubject(maildata.subject);
