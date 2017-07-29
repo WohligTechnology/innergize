@@ -13,6 +13,14 @@
         "id": "email",
         "validation": ["", "trim", ""],
         "url": ""
+    }, {
+        "name": "Name",
+        "type": "text",
+        "tableRef": "fromName",
+        "placeholder": "Enter From Name",
+        "id": "fromName",
+        "validation": ["", "trim", ""],
+        "url": ""
     }],
     "action": [{
         "name": "submit",

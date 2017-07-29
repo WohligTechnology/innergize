@@ -6,12 +6,20 @@
     "pageType": "create",
     "urlFields": ["FromMail"],
     "fields": [{
-        "name": "email",
+        "name": "Email",
         "type": "email",
         "tableRef": "email",
         "placeholder": "Enter email",
         "id": "email",
-        "validation": ["", "trim", ""],
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Name",
+        "type": "text",
+        "tableRef": "fromName",
+        "placeholder": "Enter From Name",
+        "id": "fromName",
+        "validation": ["required", "trim", ""],
         "url": ""
     }],
     "action": [{

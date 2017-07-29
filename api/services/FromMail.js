@@ -1,4 +1,8 @@
 var schema = new Schema({
+    fromName: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true,

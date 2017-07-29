@@ -54,15 +54,28 @@
             "dropDownType": "multiple",
             "validation": ["required", "", "trim"]
         }, {
-            "name": "FromEmail",
+            "name": "From Email",
             "type": "tags",
-            "tableRef": "email",
-            "placeholder": "Select FromEmail",
-            "id": "email",
+            "tableRef": "fromEmail",
+            "placeholder": "Select From Email",
+            "id": "fromEmail",
             "searchApi": "searchCall",
             "fieldType": "",
             "url": "FromMail/search",
             "dropDownField": "email",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
+        }, {
+            "name": "From Name",
+            "type": "tags",
+            "tableRef": "fromName",
+            "placeholder": "Select From Name",
+            "id": "fromName",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "FromMail/search",
+            "dropDownField": "fromName",
             "view": true,
             "dropDownType": "single",
             "validation": ["required", "", "trim"]

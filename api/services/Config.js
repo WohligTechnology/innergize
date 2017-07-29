@@ -410,13 +410,12 @@ var models = {
                 if (_.isEmpty(data)) {
                     callback("password is not Found", null)
                 } else {
-                    console.log("hello")
                     var helper = require('sendgrid').mail;
                     var sg = require('sendgrid')(data.key);
                     var fs = require('fs');
 
                     var mail = new helper.Mail();
-                    var email = new helper.Email('hr@wohlig.com', 'Example User');
+                    var email = new helper.Email('knowledge@innergize.in', 'Innergize');
                     mail.setFrom(email);
 
                     mail.setSubject(maildata.subject);

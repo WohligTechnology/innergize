@@ -16,6 +16,14 @@ var schema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Group'
     }],
+    fromEmail: {
+        type: Schema.Types.ObjectId,
+        ref: 'FromMail'
+    },
+    fromName: {
+        type: Schema.Types.ObjectId,
+        ref: 'FromMail'
+    },
     status: {
         type: String,
         default: "Pending",
@@ -26,7 +34,13 @@ var schema = new Schema({
 schema.plugin(deepPopulate, {
     populate: {
         'group': {
-            select: 'name _id'
+            select: 'name'
+        },
+        'fromName': {
+            select: 'name'
+        },
+        'fromEmail': {
+            select: 'name'
         }
     }
 });
@@ -34,7 +48,7 @@ schema.plugin(uniqueValidator);
 schema.plugin(timestamps);
 module.exports = mongoose.model('SendSchedule', schema);
 
-var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group", "group"));
+var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group fromName fromEmail", "group fromName fromEmail"));
 var model = {
     getPendingWithIn: function (callback) {
         var currentTime = moment().toDate();
@@ -47,8 +61,10 @@ var model = {
                         scheduleTime: {
                             $gt: startTime,
                             $lt: currentTime
-                        }
+                        },
+                        status: 'Pending'
                     }) // less than and greater than time
+                    .deepPopulate("fromName fromEmail")
                     .exec(function (err, schedules) {
                         callback(err, schedules);
                     })

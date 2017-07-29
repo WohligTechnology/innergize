@@ -8,6 +8,10 @@
         "name": "Email",
         "isSort": "",
         "tableRef": "email"
+    }, {
+        "name": "Name",
+        "isSort": "",
+        "tableRef": "fromName"
     }],
     "action": [{
         "name": "edit",
