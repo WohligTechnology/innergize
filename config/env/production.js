@@ -26,7 +26,7 @@ module.exports = {
    ***************************************************************************/
 
   port: 8080,
-  realHost: "http://innergize.wohlig.com",
+  realHost: "https://innergize.wohlig.com",
   emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "prajakta.kamble@wohlig.com", "harsh@wohlig.com"]
 
   /***************************************************************************
