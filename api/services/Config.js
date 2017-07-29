@@ -425,7 +425,7 @@ var models = {
                     personalization.addTo(email);
                     mail.addPersonalization(personalization);
 
-                    var content = new helper.Content('text/plan', maildata.content);
+                    var content = new helper.Content('text/plain', maildata.content);
                     mail.addContent(content);
                     console.log("subject", maildata.subject, "to", emailobj.email, "maildata.content", maildata.content);
 
