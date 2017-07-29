@@ -23,6 +23,10 @@ myApp.factory('NavigationService', function ($http) {
         name: "SendSchedule",
         classis: "active",
         sref: "#!/page/viewSendSchedule//"
+    }, {
+        name: "FromEmail",
+        classis: "active",
+        sref: "#!/page/viewFromMail//"
     }];
 
     return {

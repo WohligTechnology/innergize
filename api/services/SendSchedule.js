@@ -37,9 +37,10 @@ module.exports = mongoose.model('SendSchedule', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group", "group"));
 var model = {
     getPendingWithIn: function (callback) {
-        console.log("in getPendingWithIn")
         var currentTime = moment().toDate();
         var startTime = moment().add(-1, "hour").toDate();
+        console.log("currentTime", currentTime)
+        console.log("startTime", startTime)
         async.waterfall([
             function (callback) {
                 SendSchedule.find({
