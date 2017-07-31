@@ -1,6 +1,6 @@
 {
-    "title": "Group",
-    "description": "List of Group",
+    "title": "From Mail",
+    "description": "List of FromMail",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
@@ -36,20 +36,6 @@
         }
     }],
     "button": [{
-        "name": "Excel Export",
-        "icon": "print",
-        "class": "btn-danger",
-        "type": "redirect",
-        "action": "FromMail/generateExcel",
-        "linkType": "admin"
-    }, {
-        "name": "Upload Excel",
-        "icon": "delete",
-        "class": "btn-warning",
-        "type": "redirect",
-        "action": "excel-upload/FromMail",
-        "linkType": "internal"
-    }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",

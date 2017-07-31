@@ -36,13 +36,6 @@
         }
     }],
     "button": [{
-        "name": "Excel Export",
-        "icon": "print",
-        "class": "btn-danger",
-        "type": "redirect",
-        "action": "Email/generateExcel",
-        "linkType": "admin"
-    }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",

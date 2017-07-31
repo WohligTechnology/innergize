@@ -1,5 +1,5 @@
 {
-    "title": "Create SendSchedule",
+    "title": "Create Send Schedule",
     "name": "SendSchedule",
     "jsonPage": "viewSendSchedule",
     "desciption": "",
@@ -14,7 +14,7 @@
             "validation": ["required", "trim", ""],
             "url": ""
         }, {
-            "name": "content",
+            "name": "Content",
             "type": "textarea",
             "tableRef": "content",
             "placeholder": "Enter content",
@@ -22,7 +22,7 @@
             "validation": ["", "trim", ""],
             "url": ""
         }, {
-            "name": "scheduleTime",
+            "name": "Schedule Time",
             "type": "date",
             "tableRef": "scheduleTime",
             "placeholder": "Enter scheduleTime",
@@ -30,7 +30,7 @@
             "validation": ["", "trim", ""],
             "url": ""
         }, {
-            "name": "attachment",
+            "name": "Attachment",
             "type": "file",
             "tableRef": "attachment",
             "placeholder": "Enter attachment",
@@ -66,22 +66,9 @@
             "view": true,
             "dropDownType": "single",
             "validation": ["required", "", "trim"]
-        }, {
-            "name": "From Name",
-            "type": "tags",
-            "tableRef": "fromName",
-            "placeholder": "Select From Name",
-            "id": "fromName",
-            "searchApi": "searchCall",
-            "fieldType": "",
-            "url": "FromMail/search",
-            "dropDownField": "fromName",
-            "view": true,
-            "dropDownType": "single",
-            "validation": ["required", "", "trim"]
         },
         {
-            "name": "status",
+            "name": "Status",
             "type": "tags",
             "tableRef": "status",
             "placeholder": "Enter status",

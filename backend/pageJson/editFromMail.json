@@ -1,12 +1,12 @@
 {
-    "title": "Edit FromMail",
+    "title": "Edit From Mail",
     "name": "FromMail",
     "jsonPage": "viewFromMail",
     "desciption": "",
     "pageType": "edit",
     "urlFields": ["_id"],
     "fields": [{
-        "name": "email",
+        "name": "Email",
         "type": "email",
         "tableRef": "email",
         "placeholder": "Enter email",
