@@ -46,7 +46,7 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group fromEma
 var model = {
     getPendingWithIn: function (callback) {
         var currentTime = moment().toDate();
-        var startTime = moment().add(-1, "hour").toDate();
+        var startTime = moment().add(-1, "day").toDate();
         console.log("currentTime", currentTime)
         console.log("startTime", startTime)
         async.waterfall([
