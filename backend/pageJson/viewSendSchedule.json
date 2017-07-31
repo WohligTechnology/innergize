@@ -12,7 +12,8 @@
         {
             "name": "Schedule Time",
             "isSort": "",
-            "tableRef": "scheduleTime"
+            "tableRef": "scheduleTime",
+            "type": "date"
         }, {
             "name": "Status",
             "isSort": "",
