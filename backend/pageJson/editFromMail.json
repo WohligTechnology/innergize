@@ -1,0 +1,52 @@
+{
+    "title": "Edit From Mail",
+    "name": "FromMail",
+    "jsonPage": "viewFromMail",
+    "desciption": "",
+    "pageType": "edit",
+    "urlFields": ["_id"],
+    "fields": [{
+        "name": "Email",
+        "type": "email",
+        "tableRef": "email",
+        "placeholder": "Enter email",
+        "id": "email",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Name",
+        "type": "text",
+        "tableRef": "fromName",
+        "placeholder": "Enter From Name",
+        "id": "fromName",
+        "validation": ["", "trim", ""],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitFromMail",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewFromMail"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewFromMail"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "FromMail/save",
+        "params": "_id"
+    },
+    "preApi": {
+        "url": "FromMail/getOne",
+        "params": "_id"
+    }
+}

@@ -1,68 +1,86 @@
 {
-    "title": "Create SendSchedule",
+    "title": "Create Send Schedule",
     "name": "SendSchedule",
     "jsonPage": "viewSendSchedule",
     "desciption": "",
     "pageType": "create",
     "urlFields": ["SendSchedule"],
     "fields": [{
-        "name": "Subject",
-        "type": "text",
-        "tableRef": "subject",
-        "placeholder": "Enter subject",
-        "id": "name",
-        "validation": ["required", "trim", ""],
-        "url": ""
-    }, {
-        "name": "content",
-        "type": "textarea",
-        "tableRef": "content",
-        "placeholder": "Enter content",
-        "id": "content",
-        "validation": ["", "trim", ""],
-        "url": ""
-    }, {
-        "name": "scheduleTime",
-        "type": "date",
-        "tableRef": "scheduleTime",
-        "placeholder": "Enter scheduleTime",
-        "id": "scheduleTime",
-        "validation": ["", "trim", ""],
-        "url": ""
-    }, {
-        "name": "attachment",
-        "type": "file",
-        "tableRef": "attachment",
-        "placeholder": "Enter attachment",
-        "id": "attachment",
-        "validation": ["", "trim", ""],
-        "url": ""
-    }, {
-        "name": "Group",
-        "type": "tags",
-        "tableRef": "group",
-        "placeholder": "Select group",
-        "id": "group",
-        "searchApi": "searchCall",
-        "fieldType": "",
-        "url": "Group/search",
-        "dropDownField": "name",
-        "view": true,
-        "dropDownType": "multiple",
-        "validation": ["required", "", "trim"]
-    }, {
-        "name": "status",
-        "type": "tags",
-        "tableRef": "status",
-        "placeholder": "Enter status",
-        "id": "status",
-        "validation": ["", "trim", ""],
-        "url": "",
-        "dropDownField": "",
-        "dropDownType": "single",
-        "onView": true,
-        "dropDown": ["Pending", "Sent"]
-    }],
+            "name": "Subject",
+            "type": "text",
+            "tableRef": "subject",
+            "placeholder": "Enter subject",
+            "id": "name",
+            "validation": ["required", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Content",
+            "type": "textarea",
+            "tableRef": "content",
+            "placeholder": "Enter content",
+            "id": "content",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Schedule Time",
+            "type": "date",
+            "tableRef": "scheduleTime",
+            "placeholder": "Enter scheduleTime",
+            "id": "scheduleTime",
+            "validation": ["", "trim", ""],
+            "url": ""
+        }, {
+            "name": "Attachment",
+            "type": "file",
+            "tableRef": "attachment",
+            "placeholder": "Enter attachment",
+            "id": "attachment",
+            "view": true,
+            "onView": true,
+            "validation": ["", "trim", ""],
+            "url": ""
+
+        }, {
+            "name": "Group",
+            "type": "tags",
+            "tableRef": "group",
+            "placeholder": "Select group",
+            "id": "group",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "Group/search",
+            "dropDownField": "name",
+            "view": true,
+            "dropDownType": "multiple",
+            "validation": ["required", "", "trim"]
+        }, {
+            "name": "From Email",
+            "type": "tags",
+            "tableRef": "fromEmail",
+            "placeholder": "Select From Email",
+            "id": "fromEmail",
+            "searchApi": "searchCall",
+            "fieldType": "",
+            "url": "FromMail/search",
+            "dropDownField": "email",
+            "view": true,
+            "dropDownType": "single",
+            "validation": ["required", "", "trim"]
+        },
+        {
+            "name": "Status",
+            "type": "tags",
+            "tableRef": "status",
+            "placeholder": "Enter status",
+            "id": "status",
+            "validation": ["", "trim", ""],
+            "url": "",
+            "dropDownField": "",
+            "dropDownType": "single",
+            "onView": true,
+            "dropDown": ["Pending", "Sent"]
+        }
+    ],
     "action": [{
         "name": "submit",
         "action": "submitSendSchedule",

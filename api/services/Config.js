@@ -403,56 +403,58 @@ var models = {
         });
     },
     sendScheduledEmail: function (emailobj, maildata, callback) {
-        console.log("///////////////////", emailobj);
-        console.log("////////////////////", maildata);
         Password.findOneByName("sendgrid", function (err, data) {
             if (err) {
-
+                callback("Error", err)
             } else {
-                var helper = require('sendgrid').mail;
-                var sg = require('sendgrid')(data.key);
-                var fs = require('fs');
+                if (_.isEmpty(data)) {
+                    callback("password is not Found", null)
+                } else {
+                    var helper = require('sendgrid').mail;
+                    var sg = require('sendgrid')(data.key);
+                    var fs = require('fs');
 
-                var mail = new helper.Mail();
-                var email = new helper.Email('hr@wohlig.com', 'Example User');
-                mail.setFrom(email);
+                    var mail = new helper.Mail();
+                    var email = new helper.Email(maildata.fromEmail.email, maildata.fromEmail.fromName);
+                    mail.setFrom(email);
 
-                mail.setSubject(maildata.subject);
+                    mail.setSubject(maildata.subject);
 
-                var personalization = new helper.Personalization();
-                email = new helper.Email(emailobj.email, emailobj.name);
-                personalization.addTo(email);
-                mail.addPersonalization(personalization);
+                    var personalization = new helper.Personalization();
+                    email = new helper.Email(emailobj.email, emailobj.name);
+                    personalization.addTo(email);
+                    mail.addPersonalization(personalization);
 
-                var content = new helper.Content('text/plan', maildata.content);
-                mail.addContent(content);
+                    var content = new helper.Content('text/plain', maildata.content);
+                    mail.addContent(content);
+                    console.log("subject", maildata.subject, "to", emailobj.email, "maildata.content", maildata.content);
 
-                var attachment = new helper.Attachment();
-                // var file = fs.readFileSync('views/email/demo.txt');
-                Config.readAttachment("597b3f8ac0ccfd1e20ee3d01.pdf", function (err, data) {
-                    console.log("demonstration................");
-                    var base64File = new Buffer(data).toString('base64');
-                    attachment.setContent(base64File);
-                    // attachment.setType('application/text');
-                    attachment.setFilename("597b3f8ac0ccfd1e20ee3d01.pdf");
-                    attachment.setDisposition('attachment');
-                    mail.addAttachment(attachment);
+                    var attachment = new helper.Attachment();
+                    // var file = fs.readFileSync('views/email/demo.txt');
+                    Config.readAttachment(maildata.attachment, function (err, data) {
+                        console.log("demonstration................");
+                        var base64File = new Buffer(data).toString('base64');
+                        attachment.setContent(base64File);
+                        // attachment.setType('application/text');
+                        attachment.setFilename(maildata.attachment);
+                        attachment.setDisposition('attachment');
+                        mail.addAttachment(attachment);
+                        // console.log("dfljshadkjfhaskjdhfaksjhdfkjas", mail);
+                        var request = sg.emptyRequest({
+                            method: 'POST',
+                            path: '/v3/mail/send',
+                            body: mail.toJSON(),
+                        });
 
-                    var request = sg.emptyRequest({
-                        method: 'POST',
-                        path: '/v3/mail/send',
-                        body: mail.toJSON(),
-                    });
-
-                    sg.API(request, function (err, response) {
-                        if (err) {
-                            callback(err, "error in sending email.");
-                        } else {
+                        sg.API(request, function (err, response) {
+                            if (err) {
+                                console.log("error  in sending mail", err)
+                            }
                             callback(err, response);
-                        }
+                        });
                     });
-                });
 
+                }
             }
         });
 

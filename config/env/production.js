@@ -25,9 +25,15 @@ module.exports = {
    * Set the port in the production environment to 80                        *
    ***************************************************************************/
 
+<<<<<<< HEAD
   port: 80,
   realHost: "http://tushar.io",
   emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "prajakta.kamble@wohlig.com", "harsh@wohlig.com", "pathik.shah@innergize.in", "knowlegde@innergize.in"]
+=======
+  port: 8080,
+  realHost: "https://innergize.wohlig.com",
+  emails: ["chintan@wohlig.com", "jagruti@wohlig.com", "tushar@wohlig.com", "chirag@wohlig.com", "prajakta.kamble@wohlig.com", "harsh@wohlig.com"]
+>>>>>>> origin/master
 
   /***************************************************************************
    * Set the log level in production environment to "silent"                 *

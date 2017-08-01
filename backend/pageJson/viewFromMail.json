@@ -1,28 +1,24 @@
 {
-    "title": "User",
-    "description": "List of Users",
+    "title": "From Mail",
+    "description": "List of FromMail",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Name",
-        "isSort": "",
-        "tableRef": "name"
-    }, {
         "name": "Email",
         "isSort": "",
         "tableRef": "email"
     }, {
-        "name": "Mobile",
+        "name": "Name",
         "isSort": "",
-        "tableRef": "mobile"
+        "tableRef": "fromName"
     }],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
         "buttonClass": "btn-primary",
         "type": "page",
-        "action": "editUser",
+        "action": "editFromMail",
         "fieldsToSend": {
             "_id": "_id"
         }
@@ -31,9 +27,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete User",
-        "content": "Are you sure you want to delete User?",
-        "api": "user/delete",
+        "title": "Delete FromMail",
+        "content": "Are you sure you want to delete FromMail?",
+        "api": "FromMail/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
@@ -44,10 +40,10 @@
         "icon": "plus",
         "class": "btn-success",
         "type": "page",
-        "action": "createUser"
+        "action": "createFromMail"
     }],
     "apiCall": {
-        "url": "User/search",
+        "url": "FromMail/search",
         "params": "_id"
     }
 }

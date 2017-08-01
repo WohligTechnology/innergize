@@ -1,18 +1,25 @@
 {
-    "title": "SendSchedule",
-    "description": "List of SendSchedule",
+    "title": "Send Schedule",
+    "description": "List of Send Schedule",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
     "fields": [{
-        "name": "Subject",
-        "isSort": "",
-        "tableRef": "subject"
-    }, {
-        "name": "Status",
-        "isSort": "",
-        "tableRef": "status"
-    }],
+            "name": "Subject",
+            "isSort": "",
+            "tableRef": "subject"
+        },
+        {
+            "name": "Schedule Time",
+            "isSort": "",
+            "tableRef": "scheduleTime",
+            "type": "date"
+        }, {
+            "name": "Status",
+            "isSort": "",
+            "tableRef": "status"
+        }
+    ],
     "action": [{
         "name": "edit",
         "icon": "fa-pencil",
@@ -36,20 +43,6 @@
         }
     }],
     "button": [{
-        "name": "Excel Export",
-        "icon": "print",
-        "class": "btn-danger",
-        "type": "redirect",
-        "action": "SendSchedule/generateExcel",
-        "linkType": "admin"
-    }, {
-        "name": "Upload Excel",
-        "icon": "delete",
-        "class": "btn-warning",
-        "type": "redirect",
-        "action": "excel-upload/SendSchedule",
-        "linkType": "internal"
-    }, {
         "name": "Create",
         "icon": "plus",
         "class": "btn-success",

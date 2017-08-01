@@ -12,6 +12,10 @@
         "name": "Email",
         "isSort": "",
         "tableRef": "email"
+    }, {
+        "name": "Alias",
+        "isSort": "",
+        "tableRef": "alias"
     }],
     "action": [{
         "name": "edit",
@@ -36,13 +40,6 @@
         }
     }],
     "button": [{
-        "name": "Excel Export",
-        "icon": "print",
-        "class": "btn-danger",
-        "type": "redirect",
-        "action": "Email/generateExcel",
-        "linkType": "admin"
-    }, {
         "name": "Upload Excel",
         "icon": "delete",
         "class": "btn-warning",

@@ -1,0 +1,47 @@
+{
+    "title": "Create From Mail",
+    "name": "FromMail",
+    "jsonPage": "viewFromMail",
+    "desciption": "",
+    "pageType": "create",
+    "urlFields": ["FromMail"],
+    "fields": [{
+        "name": "Email",
+        "type": "email",
+        "tableRef": "email",
+        "placeholder": "Enter email",
+        "id": "email",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }, {
+        "name": "Name",
+        "type": "text",
+        "tableRef": "fromName",
+        "placeholder": "Enter From Name",
+        "id": "fromName",
+        "validation": ["required", "trim", ""],
+        "url": ""
+    }],
+    "action": [{
+        "name": "submit",
+        "action": "submitFromMail",
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewFromMail"
+            }
+        }
+    }, {
+        "name": "cancel",
+        "sideMenuRedirect": true,
+        "stateName": {
+            "page": "page",
+            "json": {
+                "id": "viewFromMail"
+            }
+        }
+    }],
+    "apiCall": {
+        "url": "FromMail/save"
+    }
+}

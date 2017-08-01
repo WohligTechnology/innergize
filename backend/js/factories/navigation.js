@@ -9,8 +9,7 @@ myApp.factory('NavigationService', function ($http) {
     var navigation = [{
         name: "Users",
         classis: "active",
-        sref: "#!/page/viewUser//",
-        icon: "phone"
+        sref: "#!/page/viewUser//"
     }, {
         name: "Group",
         classis: "active",
@@ -20,9 +19,13 @@ myApp.factory('NavigationService', function ($http) {
         classis: "active",
         sref: "#!/page/viewEmail//"
     }, {
-        name: "SendSchedule",
+        name: "Send Schedule",
         classis: "active",
         sref: "#!/page/viewSendSchedule//"
+    }, {
+        name: "From Email",
+        classis: "active",
+        sref: "#!/page/viewFromMail//"
     }];
 
     return {
