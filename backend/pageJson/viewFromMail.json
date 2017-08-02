@@ -1,6 +1,6 @@
 {
     "title": "From Mail",
-    "description": "List of FromMail",
+    "description": "List of From Mail",
     "pageType": "view",
     "sendIdWithCreate": true,
     "urlFields": ["_id"],
