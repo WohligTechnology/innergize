@@ -44,35 +44,41 @@ module.exports = mongoose.model('Email', schema);
 var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group", "group"));
 var model = {
     saveEmails: function (data, callback) {
-        groupNames = _.map(_.split(data.group, ","), function (n) {
-            return {
-                name: n
-            };
-        });
-        async.waterfall([
-            function (callback) { // this is function to get the group names in comma seperated format to id
-                async.concat(groupNames, Group.getIdByName, function (err, response) {
-                    if (err || _.isEmpty(response)) {
-                        callback(err, response);
-                    } else {
-                        data.group = response;
-                        callback();
-                    }
+        if (!_.isEmpty(data)) {
+            console.log("saveemails: ", data);
+            groupNames = _.map(_.split(data.Group, ","), function (n) {
+                return {
+                    name: n
+                };
+            });
+            async.waterfall([
+                function (callback) { // this is function to get the group names in comma seperated format to id
+                    console.log("groupnames: ", groupNames);
+                    async.concat(groupNames, Group.getIdByName, function (err, response) {
+                        if (err || _.isEmpty(response)) {
+                            console.log("err: ", err);
+                            callback(err);
+                        } else {
+                            data.group = response;
+                            callback(null);
+                        }
 
-                });
-            },
-            function (callback) { // save the email to the database
-                console.log(data);
-                Email.saveData({
-                    name: data.name,
-                    lastName: data.lastName,
-                    email: data.email,
-                    salutation: data.salutation,
-                    alias: data.alias,
-                    group: data.group
-                }, callback);
-            }
-        ], callback);
+                    });
+                },
+                function (callback) { // save the email to the database
+                    Email.saveData({
+                        name: data["First Name"],
+                        lastName: data["Last Name"],
+                        email: data["Email Id"],
+                        salutation: data.Salutation,
+                        alias: data.Alias,
+                        group: data.group
+                    }, callback);
+                }
+            ], callback);
+        } else {
+            callback(null, null);
+        }
     },
     getAllEmailsFromGroup: function (groupIds, callback) {
         Email.find({

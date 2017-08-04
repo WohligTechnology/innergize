@@ -6,6 +6,7 @@ var controller = {
         async.waterfall([function (callback) {
             Config.importGS(filename, callback);
         }, function (exportedData, callback) {
+            console.log("import: ", exportedData);
             async.concatSeries(
                 exportedData,
                 Email.saveEmails,
