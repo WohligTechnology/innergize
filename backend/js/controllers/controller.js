@@ -241,7 +241,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         globalfunction.confDel = function (callback) {
             var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: '/views/modal/conf-delete.html',
+                templateUrl: './backend/views/modal/conf-delete.html',
                 size: 'sm',
                 scope: $scope
             });
@@ -1130,6 +1130,8 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
             console.log("Excel is uploaded with name " + $scope.form.file);
             NavigationService.uploadExcel($scope.form, function (data) {
                 $scope.data = data.data;
+                // $scope.data = data
+                console.log("Excel is uploaded with name " + $scope.data);
             });
         };
     })
