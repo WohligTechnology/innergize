@@ -25,6 +25,11 @@ myApp.filter('showdate', function () {
         return new Date(input);
     };
 });
+myApp.filter('toDate', function () {
+    return function (input) {
+        return new moment(input).toDate();
+    };
+});
 myApp.filter('urlencoder', function () {
     return function (input) {
         return window.encodeURIComponent(input);
