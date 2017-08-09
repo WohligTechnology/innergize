@@ -6,12 +6,26 @@ var controller = {
         async.waterfall([function (callback) {
             Config.importGS(filename, callback);
         }, function (exportedData, callback) {
-            console.log("import: ", exportedData);
+            green("chintan");
+            console.log(exportedData);
             async.concatSeries(
                 exportedData,
-                Email.saveEmails,
+                function (data, callback) {
+                    Email.saveEmails(data, function (err, data) {
+                        if (err) {
+                            callback(null, err);
+                        } else {
+                            callback(null, data._id);
+                        }
+                    });
+                },
                 callback);
-        }], res.callback);
+        }], function (err, data) {
+            res.callback(err, {
+                total: data.length,
+                value: data
+            });
+        });
     },
 
     getAllEmailsFromGroup: function (req, res) {
@@ -23,7 +37,7 @@ var controller = {
                 data: {
                     message: "Invalid request"
                 }
-            })
+            });
         }
     },
 
@@ -36,7 +50,7 @@ var controller = {
                 data: {
                     message: "Invalid request"
                 }
-            })
+            });
         }
     }
 };

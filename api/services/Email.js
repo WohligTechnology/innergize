@@ -45,7 +45,6 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group", "grou
 var model = {
     saveEmails: function (data, callback) {
         if (!_.isEmpty(data)) {
-            console.log("saveemails: ", data);
             groupNames = _.map(_.split(data.Group, ","), function (n) {
                 return {
                     name: n
@@ -53,7 +52,6 @@ var model = {
             });
             async.waterfall([
                 function (callback) { // this is function to get the group names in comma seperated format to id
-                    console.log("groupnames: ", groupNames);
                     async.concat(groupNames, Group.getIdByName, function (err, response) {
                         if (err || _.isEmpty(response)) {
                             console.log("err: ", err);
@@ -73,7 +71,13 @@ var model = {
                         salutation: data.Salutation,
                         alias: data.Alias,
                         group: data.group
-                    }, callback);
+                    }, function (err, data) {
+                        if (err) {
+                            callback(err);
+                        } else {
+                            callback(null, data);
+                        }
+                    });
                 }
             ], callback);
         } else {
