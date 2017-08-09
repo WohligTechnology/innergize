@@ -303,8 +303,6 @@ var models = {
         });
     },
     generateExcel: function (name, found, res) {
-        console.log(name)
-        console.log(found)
 
         // name = _.kebabCase(name);
         var excelData = [];
@@ -405,7 +403,7 @@ var models = {
     sendScheduledEmail: function (emailobj, maildata, callback) {
         Password.findOneByName("sendgrid", function (err, data) {
             if (err) {
-                callback("Error", err)
+                callback("Error", err);
             } else {
                 if (_.isEmpty(data)) {
                     callback("password is not Found", null)

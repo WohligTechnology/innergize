@@ -46,23 +46,20 @@ var exports = _.cloneDeep(require("sails-wohlig-service")(schema, "group fromEma
 var model = {
     getPendingWithIn: function (callback) {
         var currentTime = moment().toDate();
-        var startTime = moment().add(-1, "day").toDate();
-        console.log("currentTime", currentTime)
-        console.log("startTime", startTime)
+        // var startTime = moment().add(-1, "day").toDate();
         async.waterfall([
             function (callback) {
                 SendSchedule.find({
                         scheduleTime: {
-                            $gt: startTime,
+                            // $gt: startTime,
                             $lt: currentTime
                         },
                         status: "Pending"
                     }) // less than and greater than time
                     .deepPopulate("fromName fromEmail")
                     .exec(function (err, schedules) {
-                        console.log("*****", schedules);
                         callback(err, schedules);
-                    })
+                    });
             },
             function (schedules, callback) {
                 if (_.isEmpty(schedules)) {
@@ -80,7 +77,13 @@ var model = {
                                 schedule.status = "Sent";
                                 schedule.save(callback);
                             }
-                        ], callback);
+                        ], function (err, data) {
+                            if (err) {
+                                callback(null, err);
+                            } else {
+                                callback(null, data);
+                            }
+                        });
 
                     }, callback);
                 }
