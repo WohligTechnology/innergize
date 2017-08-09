@@ -85,9 +85,12 @@ var model = {
         }
     },
     getAllEmailsFromGroup: function (groupIds, callback) {
+        groupIds = _.map(groupIds, function (n) {
+            return n + "";
+        });
         Email.find({
             group: {
-                $in: [groupIds]
+                $in: groupIds
             }
         }).lean().exec(function (err, data) {
             callback(err, data);
