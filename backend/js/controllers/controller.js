@@ -241,7 +241,7 @@ myApp.controller('DashboardCtrl', function ($scope, TemplateService, NavigationS
         globalfunction.confDel = function (callback) {
             var modalInstance = $uibModal.open({
                 animation: $scope.animationsEnabled,
-                templateUrl: './backend/views/modal/conf-delete.html',
+                templateUrl: '/backend/views/modal/conf-delete.html',
                 size: 'sm',
                 scope: $scope
             });
