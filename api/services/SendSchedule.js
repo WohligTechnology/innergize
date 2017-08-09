@@ -71,7 +71,13 @@ var model = {
                                 Email.getAllEmailsFromGroup(schedule.group, callback);
                             },
                             function (emails, callback) { // send emails to emails recive
-                                Email.sendEmailWithAttachment(emails, schedule, callback);
+                                Email.sendEmailWithAttachment(emails, schedule, function (err, data) {
+                                    if (err) {
+                                        callback(null, err);
+                                    } else {
+                                        callback(null, data);
+                                    }
+                                });
                             },
                             function (data, callback) { // change the status if pending to sent
                                 schedule.status = "Sent";
