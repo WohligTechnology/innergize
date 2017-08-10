@@ -23,9 +23,9 @@
         "icon": "fa-trash",
         "buttonClass": "btn-danger",
         "type": "apiCallConfirm",
-        "title": "Delete User",
-        "content": "Are you sure you want to delete User?",
-        "api": "user/delete",
+        "title": "Delete Group",
+        "content": "Are you sure you want to delete Group?",
+        "api": "group/delete",
         "fieldsToSend": {
             "name": "_id",
             "value": "_id"
