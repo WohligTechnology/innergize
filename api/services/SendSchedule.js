@@ -12,6 +12,9 @@ var schema = new Schema({
     attachment: {
         type: String
     },
+    attachmentName:{
+        type: String
+    },
     group: [{
         type: Schema.Types.ObjectId,
         ref: 'Group'

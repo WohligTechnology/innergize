@@ -423,18 +423,18 @@ var models = {
                     personalization.addTo(email);
                     mail.addPersonalization(personalization);
 
-                    var content = new helper.Content('text/plain', maildata.content);
+                    var content = new helper.Content('text/html', "<html><body>"+emailobj.salutation+" "+emailobj.alias+",<br><p>&emsp;"+maildata.content+"</p></body></html>");
                     mail.addContent(content);
                     console.log("subject", maildata.subject, "to", emailobj.email, "maildata.content", maildata.content);
 
                     var attachment = new helper.Attachment();
                     // var file = fs.readFileSync('views/email/demo.txt');
                     Config.readAttachment(maildata.attachment, function (err, data) {
-                        console.log("demonstration................");
+                        console.log("demonstration................",data);
                         var base64File = new Buffer(data).toString('base64');
                         attachment.setContent(base64File);
                         // attachment.setType('application/text');
-                        attachment.setFilename(maildata.attachment);
+                        attachment.setFilename(maildata.attachmentName);
                         attachment.setDisposition('attachment');
                         mail.addAttachment(attachment);
                         // console.log("dfljshadkjfhaskjdhfaksjhdfkjas", mail);
