@@ -422,22 +422,17 @@ var models = {
                     email = new helper.Email(emailobj.email, emailobj.name);
                     personalization.addTo(email);
                     mail.addPersonalization(personalization);
-
-                    var content = new helper.Content('text/html', "<html><body>"+emailobj.salutation+" "+emailobj.alias+",<br><p>&emsp;"+maildata.content+"</p></body></html>");
+                    if (emailobj.alias == null) {
+                        var content = new helper.Content('text/html', "<html><body>" + emailobj.salutation + " " + ",<br><p>&emsp;" + maildata.content + "</p></body></html>");
+                    } else {
+                        var content = new helper.Content('text/html', "<html><body>" + emailobj.salutation + " " + emailobj.alias + ",<br><p>&emsp;" + maildata.content + "</p></body></html>");
+                    }
                     mail.addContent(content);
                     console.log("subject", maildata.subject, "to", emailobj.email, "maildata.content", maildata.content);
 
                     var attachment = new helper.Attachment();
                     // var file = fs.readFileSync('views/email/demo.txt');
-                    Config.readAttachment(maildata.attachment, function (err, data) {
-                        console.log("demonstration................",data);
-                        var base64File = new Buffer(data).toString('base64');
-                        attachment.setContent(base64File);
-                        // attachment.setType('application/text');
-                        attachment.setFilename(maildata.attachmentName);
-                        attachment.setDisposition('attachment');
-                        mail.addAttachment(attachment);
-                        // console.log("dfljshadkjfhaskjdhfaksjhdfkjas", mail);
+                    if (maildata.attachment == null) {
                         var request = sg.emptyRequest({
                             method: 'POST',
                             path: '/v3/mail/send',
@@ -450,8 +445,30 @@ var models = {
                             }
                             callback(err, response);
                         });
-                    });
+                    } else {
+                        Config.readAttachment(maildata.attachment, function (err, data) {
+                            console.log("demonstration................", data);
+                            var base64File = new Buffer(data).toString('base64');
+                            attachment.setContent(base64File);
+                            // attachment.setType('application/text');
+                            attachment.setFilename(maildata.attachmentName);
+                            attachment.setDisposition('attachment');
+                            mail.addAttachment(attachment);
+                            // console.log("dfljshadkjfhaskjdhfaksjhdfkjas", mail);
+                            var request = sg.emptyRequest({
+                                method: 'POST',
+                                path: '/v3/mail/send',
+                                body: mail.toJSON(),
+                            });
 
+                            sg.API(request, function (err, response) {
+                                if (err) {
+                                    console.log("error  in sending mail", err)
+                                }
+                                callback(err, response);
+                            });
+                        });
+                    }
                 }
             }
         });

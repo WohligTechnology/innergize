@@ -45,7 +45,7 @@
             "tableRef": "attachmentName",
             "placeholder": "Attachment Name with extention",
             "id": "attachmentName",
-            "validation": ["required", "trim", ""],
+            "validation": ["", "trim", ""],
             "url": ""
         }, {
             "name": "Group",
