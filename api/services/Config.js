@@ -423,7 +423,7 @@ var models = {
                     personalization.addTo(email);
                     mail.addPersonalization(personalization);
                     if (emailobj.alias == null) {
-                        var content = new helper.Content('text/html', "<html><body>" + emailobj.salutation + " " + ",<br><p>&emsp;" + maildata.content + "</p></body></html>");
+                        var content = new helper.Content('text/html', "<html><body>" + emailobj.salutation + ",<br><p>&emsp;" + maildata.content + "</p></body></html>");
                     } else {
                         var content = new helper.Content('text/html', "<html><body>" + emailobj.salutation + " " + emailobj.alias + ",<br><p>&emsp;" + maildata.content + "</p></body></html>");
                     }
